@@ -1,5 +1,16 @@
 from datetime import date
-from sqlalchemy import Integer, String, ForeignKey, Float, Date, Column, DateTime, func, Boolean
+from enum import Enum
+
+from sqlalchemy import (
+    Integer,
+    String,
+    ForeignKey,
+    Date,
+    Column,
+    DateTime,
+    func,
+    Boolean,
+)
 from sqlalchemy.orm import DeclarativeBase, relationship, Mapped, mapped_column
 
 
@@ -17,7 +28,9 @@ class Contact(Base):
     phone: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     birthday: Mapped[date] = mapped_column(Date)
     additional: Mapped[str] = mapped_column(String)
-    user_id = Column("user_id", ForeignKey("users.id", ondelete="CASCADE"), default=None)
+    user_id = Column(
+        "user_id", ForeignKey("users.id", ondelete="CASCADE"), default=None
+    )
     user = relationship("User", backref="contacts")
 
 

@@ -3,6 +3,8 @@ from typing import List, Optional
 from datetime import date
 
 
+
+
 class ContactSchema(BaseModel):
     first_name: str = Field(min_length=2, max_length=20)
     second_name: str = Field(min_length=2, max_length=20)
@@ -22,6 +24,8 @@ class User(BaseModel):
     username: str
     email: str
     avatar: str
+    confirmed: bool = False
+
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -30,6 +34,7 @@ class UserCreate(BaseModel):
     username: str
     email: str
     password: str
+
 
 
 class Token(BaseModel):

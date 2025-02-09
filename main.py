@@ -3,6 +3,8 @@ from starlette.responses import JSONResponse
 from slowapi.errors import RateLimitExceeded
 from src.api import utils, contacts, auth, users
 from fastapi.middleware.cors import CORSMiddleware
+import redis
+from redis_lru import RedisLRU
 
 app = FastAPI()
 
@@ -43,7 +45,10 @@ app.include_router(contacts.router, prefix="/api")
 app.include_router(auth.router, prefix="/api")
 app.include_router(users.router, prefix="/api")
 
+client = redis.StrictRedis(host="localhost", port=6379, password=None)
+cache = RedisLRU(client)
+
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

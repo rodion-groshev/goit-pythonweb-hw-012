@@ -15,3 +15,4 @@ fastapi-mail
 python-multipart
 pytest~=8.3.4
 pytest-asyncio~=0.25.3
+redis~=5.2.1
