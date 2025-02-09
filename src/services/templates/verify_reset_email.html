@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>Hi {{username}},</p>
+    <p>Thank you for signing up for our service.</p>
+    <p>Please click the following link to reset your password:</p>
+    <p><a href="{{host}}api/auth/reset_password/{{token}}">Reset password test token: {{token}}</a></p>
+    <p>If you did not request this, please ignore this email.</p>
+</body>
+</html>

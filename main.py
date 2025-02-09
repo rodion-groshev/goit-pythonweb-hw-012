@@ -6,9 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "127.0.0.1:8000"
-]
+origins = ["127.0.0.1:8000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,6 +19,19 @@ app.add_middleware(
 
 @app.exception_handler(RateLimitExceeded)
 async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    """
+    Handles exceptions raised when a rate limit is exceeded.
+
+    This function is triggered when the `RateLimitExceeded` exception occurs,
+    returning a JSON response with a 429 status code indicating too many requests.
+
+    Args:
+        request (Request): The incoming HTTP request that triggered the exception.
+        exc (RateLimitExceeded): The exception instance containing details about the rate limit breach.
+
+    Returns:
+        JSONResponse: A response containing an error message and a 429 status code.
+    """
     return JSONResponse(
         status_code=status.HTTP_429_TOO_MANY_REQUESTS,
         content={"error": "Перевищено ліміт запитів. Спробуйте пізніше."},
